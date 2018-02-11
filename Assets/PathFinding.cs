@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PathFinding : MonoBehaviour
@@ -20,15 +21,16 @@ public class PathFinding : MonoBehaviour
     {
         Vector3[] wayPoints = new Vector3[0];
         bool success = false;
+        
         Node seekerNode = grid.NodeFromWorldPoint(seekerPos);
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
+        
         if (seekerNode.walkable && targetNode.walkable)
         {
             Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
             HashSet<Node> closedSet = new HashSet<Node>();
 
             openSet.Add(seekerNode);
-
 
             while (openSet.Count > 0)
             {
@@ -91,6 +93,7 @@ public class PathFinding : MonoBehaviour
 
     private Vector3[] SimplifyPath(List<Node> path)
     {
+        //return path.Select(x => x.worldPos).ToArray();
         List<Vector3> waypoints = new List<Vector3>();
         Vector2 oldDirection = Vector2.zero;
         for (int i = 1; i < path.Count; i++)
@@ -100,7 +103,6 @@ public class PathFinding : MonoBehaviour
             {
                 waypoints.Add(path[i].worldPos);
             }
-
             oldDirection = newDirection;
         }
 

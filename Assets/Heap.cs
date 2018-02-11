@@ -56,8 +56,8 @@ public class Heap<T> where T: IHeapItem<T>
         T firstItem = items[0];
         currentItemCount--;
         items[0] = items[currentItemCount];
-        SortDown(items[0]);
         items[0].HeapIndex = 0;
+        SortDown(items[0]);
         return firstItem;
     }
 

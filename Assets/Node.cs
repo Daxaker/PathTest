@@ -35,7 +35,7 @@ public class Node : IHeapItem<Node>
             compare = hCost.CompareTo(other.hCost);
         }
 
-        return compare; 
+        return -compare; 
     }
 
     public int HeapIndex { get; set; }
